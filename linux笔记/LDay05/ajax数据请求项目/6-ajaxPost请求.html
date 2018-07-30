@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>get-ajax</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<!--php文件必须在服务器下才能执行-->
+		<button>数据请求</button>
+		<br />
+		<input id="i1" type="text" placeholder="please input username"/>
+		<br />
+	    <input id="i2" type="text" placeholder="please input context"/>
+
+		
+		<script type="text/javascript">
+			
+			// ajax(): ajax数据请求
+			// get  post
+			/*
+			 * get与post区别：
+			 * get：必须是一个完整的地址，包含IP地址与全部参数，可以在网页端直接获取整个网址。
+			 * 
+			 * post：必须是一个完整的地址，在网页端只能获取到IP地址，参数放在数据流中加密保存。
+			 */
+			/*
+			 * ajax() 为全局函数，在jquery中用$调用即可。
+			 * 
+			 * ajax(options):
+			 * options本身为字典类型的参数，ajax请求时需要的各种类型的参数。
+			 */
+			$("button").click(function(){
+				// 获取输入框中的文字
+				var user = $("#i1").val();
+				var con = $("#i2").val();
+				
+				// get请求
+				$.ajax({
+					// type：设置请求类型  get post
+					type:"post",
+					// url:接口，如果未get请求，可以将完整的接口写在url中，也可以只写IP地址，将get请求
+					// 中的参数放到data中
+					url:"post.php",
+					// async:是否进行异步请求，默认异步请求；如果为同步请求，改为false
+					async:true,
+					// data:接口中的参数，数据类型为字典格式{key:value}
+					// 注：如果为get请求，该参数可以省略，将接口中的内容写在url中，如果url中只有IP地址，将
+					// 接口中的参数写在data中。
+					// 如果为post请求，该参数不能省略，将接口中的参数写在data中。
+					data:{"username": user,"content": con},
+					// dataType:返回的数据格式，默认为json
+					dataType:"json",
+					// success:当请求成功时执行该参数，需要一个函数类型的参数。
+					// 该函数的第一个形参为接口返回的数据
+					success:function(data){
+						console.log(data);
+					},
+					// error:当请求失败时执行该参数，需要一个函数类型的参数。
+					error:function(){
+						console.log("错误");
+					}
+					
+				});
+				
+			})
+			
+		</script>
+	</body>
+</html>

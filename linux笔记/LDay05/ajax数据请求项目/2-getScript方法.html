@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>getScript</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<button>数据请求</button>
+	    <!--立即执行js文件中所有内容-->
+		<!--<script type="text/javascript" src="alertFun.js" ></script>-->
+		
+		<script type="text/javascript">
+			/*
+			 * 动态加载js文件
+			 * getScript("js文件路径", [callback])
+			 * getScript为全局函数，在jquery中用$调用即可。
+			 */
+			$("button").click(function(){
+				
+				// 无回调函数
+				// $.getScript("alertFun.js");
+				
+				// 有回调函数
+				$.getScript("alertFun.js", function(responseText,status,XMLHttpRequest){
+					// 请求下来的数据内容
+					console.log(responseText);
+					// 请求的结论
+					console.log(status);
+					// 请求时的参数
+					console.log(XMLHttpRequest);
+				})
+				
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

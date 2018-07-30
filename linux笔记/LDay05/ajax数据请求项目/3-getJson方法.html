@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>getJson</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<button>数据请求</button>
+		<div></div>
+		
+		<script type="text/javascript">
+			
+			/*
+			 * json:字典或数组
+			 * jsonArr： 数组类型   []
+			 * jsonDict:字典类型  {}
+			 * jsonStr：字符串类型   ""
+			 */
+			// getJson("JSON文件路径"，[callback])
+			// getJson为全局函数，在jquery中用$调用即可。
+			
+			// 如果使用getJson，证明我们需要使用获取到的数据，一般都会写回调函数，回调函数的第一个形参代表获取的数据。
+			
+			$("button").click(function(){
+				
+				// $.getJSON("movieList.json");
+				
+				$.getJSON("movieList.json", function(data){
+					console.log(data);
+					// 解析数据
+					// 输出title
+					var arr = data["data"];
+					for (var i = 0; i < arr.length; i++) {
+						console.log(arr[i]);
+						console.log(arr[i]["title"]);
+						
+						// 创建新的标签并加载到页面上
+						var $p = "<p>"+ arr[i]["title"] +"</p>";
+						$("div").append($p);
+						
+					}
+				})
+				
+			})
+			
+		</script>
+		
+	</body>
+</html>

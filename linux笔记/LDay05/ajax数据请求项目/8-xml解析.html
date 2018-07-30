@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>xml</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<button>数据请求</button>
+		<!--bkjb-->
+		<script type="text/javascript">
+			$("button").click(function(){
+				
+				$.ajax({
+					type:"get",
+					url:"oschina.xml",
+					async:true,
+					success:function(data){
+						console.log(data);
+						// 获取xml中的所有body标签
+						var bodyArr = data.getElementsByTagName("body");
+						console.log(bodyArr);
+						// 获取第一个元素
+						var body = bodyArr[0];
+						console.log(body);
+						// 获取标签中的第一个节点
+						var textNode = body.firstChild;
+						console.log(textNode);
+						console.log("sdfsdgsefhrs");
+						// 获取节点中的文本文字
+						var textStr = textNode.nodeValue;
+						console.log(textStr);
+						
+						console.log(bodyArr[0].firstChild.nodeValue);
+						
+					}
+				});
+			})
+			
+		</script>
+	</body>
+</html>

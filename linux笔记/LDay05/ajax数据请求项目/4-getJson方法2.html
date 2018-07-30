@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>getJson</title>
+		<script type="text/javascript" src="js/jquery.js"></script>
+	</head>
+
+	<body>
+		<button>数据请求</button>
+		<div>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+			<h1>1</h1>
+			<p></p>
+		</div>
+
+		<script type="text/javascript">
+			$("button").click(function() {
+
+				$.getJSON("appList.json", function(data) {
+					console.log(data);
+					// 解析数据
+					// 输出title
+					var arr = data["applications"];
+					for(var i = 0; i < arr.length; i++) {
+						console.log(arr[i]);
+						console.log(arr[i]["name"]);
+
+						// 创建新的标签并加载到页面上
+						$("div h1").eq(i).text(arr[i]["name"]);
+						$("div p").eq(i).text(arr[i]["description"]);
+
+					}
+				})
+
+			})
+		</script>
+
+	</body>
+
+</html>

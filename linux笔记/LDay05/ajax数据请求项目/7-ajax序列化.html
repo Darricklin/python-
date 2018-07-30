@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>get-ajax</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<button>数据请求</button>
+		<br />
+        <form id="form1">
+        	账号：<input type="text" id="i1" placeholder="username" name="username"/>
+        	<br />
+        	sex：<input type="radio" id="i2" name="sex" value="0" checked="checked"/>男
+        	<input type="radio" id="i3" name="sex" value="1"/>女
+        	<br />
+        	age：<input type="number" id="i4" name="age" value="16"/>
+        	<br />
+        	email：<input type="text" id="i5" placeholder="email" name="email"/>
+        	<br />
+        	address：<input type="text" id="i6" placeholder="address" name="address"/>
+        	<br />
+        	content：<input type="text" id="i7" placeholder="content" name="content"/>
+        	<br />
+        </form>
+		
+		<script type="text/javascript">
+			$("button").click(function(){
+				/*
+				var user = $("#i1").val();
+				var sex = $("input:checked").val();
+				var age = $("#i4").val();
+				var email = $("#i5").val();
+				var address = $("#i6").val();
+				var content = $("#i7").val();
+				*/
+				
+				
+				$.ajax({
+					
+					type:"post",
+					url:"info.php",
+					async:true,
+					//data:{"username":user,"sex":sex,"age":age,
+					// "email":email,"address":address,"content":content},
+					data:$("#form1").serialize(),
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+					},
+					error:function(){
+						console.log("错误");
+					}
+				});
+			})
+			
+		</script>
+	</body>
+</html>

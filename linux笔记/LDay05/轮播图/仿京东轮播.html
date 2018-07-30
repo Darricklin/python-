@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仿轮播</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<style type="text/css">
+			
+			#content{
+				margin: 0px auto;
+				width: 750px;
+				height: 300px;
+				position: relative;
+			}
+			img{
+				width: 750px;
+				height: 300px;
+				top: 0px;
+				left: 0px;
+				position: absolute;
+			}
+			.showimg{
+				display: block;
+			}
+			
+			.hiddenimg{
+				display: none;		
+			}
+			#left{
+				width: 35px;
+				height: 70px;
+				background-color: rgba(70,70,70,0.5);
+				position: absolute;
+				left: 0px;
+				top: 115px;
+				line-height: 70px;
+				color: white;
+				text-align: center;
+				font-size: 30px;
+			}
+			#right{
+				width: 35px;
+				height: 70px;
+				background-color: rgba(70,70,70,0.5);
+				position: absolute;
+				right: 0px;
+				top: 115px;
+				line-height: 70px;
+				color: white;
+				text-align: center;
+				font-size: 30px;
+			}
+			#left:hover{
+				background-color: rgba(70,70,70,0.9);
+			}
+			#right:hover{
+				background-color: rgba(70,70,70,0.9);
+			}
+		</style>
+		
+	</head>
+	
+	
+	<body>
+		<!--
+			京东
+			//1、图片放在页面中间
+			  //1.1、图片切换
+			  //1.2、淡入淡出的方式切换图片
+			//2、左右两端有按钮
+			  //2.1、左按钮向左切换
+			  //2.2、右按钮向右切换
+			  //2.3、当鼠标放到按钮上时，按钮颜色变深
+			3、图片下方有导航点
+			  3.1、鼠标在那个点上，导航点高亮，图片切换到第几张
+			  3.2、图片切换到第几张，导航点高亮。
+			4、广告自动轮播
+			  4.1、图片默认向右轮播
+			  4.2、鼠标放在广告位置时，停止轮播
+			  4.3、鼠标离开，自动轮播
+			5、鼠标放到广告位时，为小手的形状
+			
+			实现思路：
+			所有图片在同一位置
+			当一张显示，其他隐藏
+		-->
+		<!--界面-->
+		<div id="content">
+			<!--图片-->
+			<img src="img/1.jpg" class="showimg"/>
+			<img src="img/2.jpg" class="hiddenimg"/>
+			<img src="img/3.jpg" class="hiddenimg"/>
+			<img src="img/4.jpg" class="hiddenimg"/>
+			
+			<!--按钮-->
+			<div id="left">&lt;</div>
+			<div id="right">&gt;</div>
+		</div>
+		
+		<script type="text/javascript">
+			
+			$(function(){
+				
+				// 设置默认显示的图片为第一张
+				var imgIndex = 0;
+				
+				$("#right").click(function(){
+					/*
+					// 点击按钮向右切换图片
+					// 获取当前图片的下标
+					var imgIndex = $("img").index($(".showimg"));
+					//alert(imgIndex);
+					// 下一张添加showimg
+					// 当前图片添加hiddenimg
+					$("img").eq(imgIndex).removeClass("showimg").addClass("hiddenimg");
+					// 当现在已经时最后一张，移向第一张
+//					if(imgIndex == 3){
+//						imgIndex = -1;
+//					}
+					$("img").eq((imgIndex+1) % 4).removeClass("hiddenimg").addClass("showimg");
+					*/
+					var showImg = imgIndex;
+					imgIndex++;
+					// 临界条件
+					if(imgIndex == 4){
+						imgIndex = 0;
+					}
+					$("img").eq(showImg).fadeOut(1000);
+					$("img").eq((showImg+1) %4).fadeIn(1000);
+				})
+				
+				$("#left").click(function(){
+					var showImg = imgIndex;
+					imgIndex--;
+					// 临界条件
+					if(imgIndex == -1){
+						imgIndex = 3;
+					}
+					$("img").eq(showImg).fadeOut(1000);
+					$("img").eq((showImg-1) %4).fadeIn(1000);
+				})
+				
+			})
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>load</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+	</head>
+	<body>
+		<button>数据请求</button>
+		<div></div>
+		
+		<script type="text/javascript">
+			// 数据请求
+			// 异步请求：提高速度，页面流畅度
+			// 同步请求：页面卡顿，支付
+			
+			$("button").click(function(){
+				
+				/* 
+				 * 异步加载数据
+				 * load(url [,data][,callback])
+				 * url:接口    网址    路由
+				 * data：参数    name=lily&passwd=123456
+				 * callback:回调函数   当请求结束后执行(请求成功或失败)
+				 */
+				// load加载整个页面
+				// $("div").load("load.html");
+				
+				// load加载部分页面
+				// $("div").load("load.html #p1");
+				 
+				// 带有回调函数
+				$("div").load("load.html", function(responseText,status,XMLHttpRequest){
+					alert("hello");
+					// 请求下来的数据内容
+					console.log(responseText);
+					// 请求的结论
+					console.log(status);
+					// 请求时的参数
+					console.log(XMLHttpRequest);
+					/*
+					 * readyState:
+					 * 0:初始化请求 XMLHttpRequest
+					 * 1：发送请求
+					 * 2：接收数据过程
+					 * 3：解析数据
+					 * 4：数据完全解析完毕，请求结束
+					 * 
+					 * status：
+					 * 200：正确请求并解析成功， 接口IP正确。接口参数中的key正确
+					 * 3XX：请求出现中转
+					 * 4XX：请求失败，IP地址错误或参数错误
+					 * 5XX：服务器错误
+					 * 
+					 * 
+					 * http://iappfree.candou.com:8080/free/applications/limited?currency=rmb&page=1
+					 */
+				})
+				
+			})
+			
+		</script>
+		
+	</body>
+</html>
