@@ -1,0 +1,112 @@
+一、git
+git：客户端
+github：服务器端   上传源代码   管理合并等操作
+windows：可视化客户端
+svn：项目管理工具
+
+git：项目管理工具，可以允许一个项目多人或单人同时开发，可以管理及合并代码。
+1、安装：sudo apt install git
+2、配置git
+git config --global user.name "git的用户名"
+git config --global user.email "git用户的邮箱"
+3、根据用户名及邮箱生成密钥（该密钥会用于该账号）
+ssh-keygen -t rsa -C "git用户的邮箱"
+
+执行完以上命令后所有位置回车即可。
+
+生成的密钥默认存放在 /home/用户名/.ssh 目录下。
+使用的密钥文件为 id_rsa.pub
+
+cat id_rsa.pub 查看密钥内容
+密钥可使用的文件范围：从开始到邮箱之前(不包含邮箱内容)
+复制该密钥
+4、配置密钥
+在网页端登陆git账号，配置到用户设置中：
+用户->settings->SSH&GPG keys->new ssh key
+5、检测密钥是否可用
+ssh -T git@github.com
+
+见到 successful... 代表成功
+6、测试能否下载项目
+git clone git@github.com:Meakelra/PythonTest.git
+
+如果能够下载成功，现在git没有问题。
+
+二、github上传及更新项目
+1、在网页端新建一个仓库(项目)  new respository
+2、当需要给github上面的项目上传文件或目录时，需要在文件或目录的上一级目录下执行init，将目录内容与git相关联。
+    git init
+将一个普通文件初始化为可以链接git的文件
+3、链接远程仓库
+git remote add origin git@github.com:git用户名/git项目.git
+
+4、需要将上传到github上的内容写在add后面
+该命令执行的路径为init的路径下
+   git add 文件或目录名称
+让系统自动判断添加的内容：
+    git add .
+5、将add的信息提交到本地仓库
+   git commit -m "自己对本次提交的内容的说明"
+6、将提交的内容同步到github上
+   git push -u origin master
+注：如果提交时出现一个(pull ...)等内容，如果不想更新本地内容，可以强制提交：
+出现该问题的原因：github上的项目与本地项目内容不一致。
+   git push -u origin +master
+
+三、下载github上已经存在的项目(下载到本地电脑)
+1、将github上的项目clone到电脑的某一路径下
+git clone git@github.com:用户名/项目名称.git
+2、需要将上传到github上的内容写在add后面
+该命令执行的路径为init的路径下
+   git add 文件或目录名称
+让系统自动判断添加的内容：
+    git add .
+3、将add的信息提交到本地仓库
+   git commit -m "自己对本次提交的内容的说明"
+4、将提交的内容同步到github上
+   git push -u origin master
+注：如果提交时出现一个(pull ...)等内容，如果不想更新本地内容，可以强制提交：
+出现该问题的原因：github上的项目与本地项目内容不一致。
+   git push -u origin +master
+
+四、修改本地项目内容，更新到github上
+（本地已经存在项目，但后来修改的部分内容）
+1、需要将上传到github上的内容卸载add后面
+该命令执行的路径为init的路径下
+   git add 文件或目录名称
+让系统自动判断添加的内容：
+    git add .
+2、将add的信息提交到本地仓库
+   git commit -m "自己对本次提交的内容的说明"
+3、将提交的内容同步到github上
+   git push -u origin master
+注：如果提交时出现一个(pull ...)等内容，如果不想更新本地内容，可以强制提交：
+出现该问题的原因：github上的项目与本地项目内容不一致。
+   git push -u origin +master
+
+五、当多人合作开发
+1、更新本地仓库(项目)
+   git pull origin master
+2、其他指令与之前一致
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
