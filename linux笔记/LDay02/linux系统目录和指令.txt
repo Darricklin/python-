@@ -1,0 +1,261 @@
+一、Linux系统启动
+1、boot启动：类似bios
+2、init进程：初始化主进程
+3、初始化子进程
+4、初始化shell（终端）
+5、初始化登陆界面
+
+二、Linux系统的运行状态
+1、 0：关机状态
+2、 1：单用户状态，root用户状态，Linux系统维护时只有root有效时。
+3、 2：多用户状态，没有网络文件系统
+4、 3：完全多用户状态，工作中常见的状态之一(只有黑终端窗口)
+5、 4：系统保留状态，未使用
+6、 5：完全多用户状态，工作中常见的状态之一(有图形化界面，开发中常用的状态)
+7、 6：关机并重启
+
+获取当前用户运行级别：
+1、runlevel
+2、who -r
+
+who: 获取当前登陆的用户的信息
+
+切换运行级别：
+init 级别Number   （以后少用）
+   init 6  （关机并重启）
+
+
+三、系统目录
+1、进入根目录 ： cd /  进入系统的根目录下 
+/ ： 根目录，当前电脑下所有的文件及目录都在根目录下。  / 就是Linux系统的最高领导者。
+2、不同版本的Linux系统的根目录有细微差别，单独去查看。
+3、Linux中的概念：将所有的东西，内容都当成一个文件来处理(键盘、鼠标、光盘等被抽象为一个文件来处理)
+
+4、bin：可执行的二进制文件，通常放置系统自带的二进制文件。
+5、dev：Device，设备通常将系统的硬件抽象成一个文件放在这里。
+6、initrd.img：系统最小的一个映像文件，包含着一个最小的linux系统。
+7、lost+found：异常关机时产生的错误日志或错误文件。
+8、opt：Options，存放开发者自己开发并安装的软件，属于可选文件。
+9、run：系统运行时必要的文件。
+10、srv：系统服务启动时需要访问的文件或数据目录。
+11、usr：存放于用户直接相关的文件目录。
+12、boot：启动时需要的配置文件，核心文件。
+13、etc：配置文件(系统中所需要的各种配置文件,除非安装某些软件时需要更改系统的配置文件，否则不要改其任何内容)
+14、lib、lib64：库，系统内置的库文件，自己安装的软件的静态链接，windows中的dll相似。
+15、media：媒体，存放系统的外接设备的文件，如：U盘
+16、proc：系统的文件，存放系统信息。
+17、sbin：超级管理员特用的二进制文件（root用户）
+18、sys：系统文件
+19、var：存放系统中随时更改的文件。
+20、cdrom：挂载入口，该目录在刚刚创建时一般为空，一般将光驱的文件挂在该目录下。
+21、home：家，每个用户都会在home下拥有一个自己的目录，该目录名称与用户名名称一致。
+22、mnt：临时挂载入口。
+23、root：超级管理员的目录。
+24、snap：全新的管理软件包的方式。
+25、tmp：临时文件。
+26、vmlinuz：软链接，链接文件为boot目录下的一个vmlinuz..文件
+
+
+四、常用命令-获取系统信息
+1、lshw:获取硬件信息
+
+
+2、lscpu: 获取CPU信息
+3、lsusb: 获取USB接口信息
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 004: ID 0e0f:0008 VMware, Inc. 
+Bus 002 Device 003: ID 0e0f:0002 VMware, Inc. Virtual USB Hub
+Bus 002 Device 002: ID 0e0f:0003 VMware, Inc. Virtual Mouse
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+
+
+
+4、uname:系统相关信息 
+  Linux
+    uname -a : 获取所有信息     Linux sl-virtual-machine 4.13.0-45-generic #50~16.04.1-Ubuntu SMP      Wed May 30 11:18:27 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+5、arch: 查看机器的体系结构    x86_64
+6、df: 查看磁盘空间
+Filesystem     1K-blocks    Used Available Use% Mounted on
+udev              982532       0    982532   0% /dev
+tmpfs             201808    6372    195436   4% /run
+/dev/sda1       28768380 5141496  22142496  19% /
+tmpfs            1009036     212   1008824   1% /dev/shm
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs            1009036       0   1009036   0% /sys/fs/cgroup
+tmpfs             201808      68    201740   1% /run/user/1000
+
+    df -h : 方便查看数据的参数 -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            960M     0  960M   0% /dev
+tmpfs           198M  6.3M  191M   4% /run
+/dev/sda1        28G  5.0G   22G  19% /
+tmpfs           986M  212K  986M   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           986M     0  986M   0% /sys/fs/cgroup
+tmpfs           198M   68K  198M   1% /run/user/1000
+
+
+
+7、date: 查看日期和时间
+
+2018年 07月 09日 星期一 20:23:48 CST
+
+
+
+8、hostname: 显示主机名
+sl-virtual-machine
+9、ifconfig: 显示网络接口参数
+，查看IP地址  有些电脑系统或版本为ipconfig
+ens33     Link encap:Ethernet  HWaddr 00:0c:29:dc:de:3d  
+          inet addr:192.168.253.128  Bcast:192.168.253.255  Mask:255.255.255.0
+          inet6 addr: fe80::1d8e:f130:18ac:c5f1/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:57 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:136 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:7923 (7.9 KB)  TX bytes:16230 (16.2 KB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:208 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:208 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:16368 (16.3 KB)  TX bytes:16368 (16.3 KB)
+
+五、常用命令-关机或重启命令
+1、poweroff: 关机
+2、shutdown -h now : 关机
+
+3、systemctl poweroff: 关机
+
+4、shutdown -h +5: 五分钟后关机
+
+
+6、shutdown -c : 取消定时关机
+
+
+7、reboot:重启
+
+
+8、shutdown -r now
+:重启9、systemctl reboot:重启
+
+
+六、常用命令-
+1、ls：查看目录中的文件或目录
+   使用规则： ls [选项][目录]
+    ls -a ： 查看全部文件
+    ls -l ：显示文件或目录的详细信息
+
+文件关系：
+   d : 目录
+   - ： 文件
+
+.bash_history : 记录终端关闭后执行的命令
+
+目录关系：
+1、. : 当前目录
+2、.. : 上一级目录
+3、当文件名称以.开头时，被认为是隐藏文件，隐藏文件可以操作，当图形化界面上看不见
+
+2、cd ： 切换目录（切换的目录要求存在）
+   cd .. ： 回到上一级目录
+
+3、pwd ： 展示当前所在目录 （绝对路径，完整路径）
+
+/home/sl/Desktop/aa
+
+4、mkdir ：创建目录
+   创建一个目录：mkdir 目录名
+   创建多个目录：mkdir 目录1 目录2 ...
+   创建多级目录：mkdir -p 目录1/目录2/....
+5、rmdir ： 删除空目录
+   删除一个目录：rmdir 目录名
+   删除多个目录：rmdir 目录1 目录2 ...
+6、rm ：删除文件及目录
+   删除文件： rm 文件名
+   删除目录： rm -rf 目录名 （-f：为强制执行，慎重使用）
+注：rm与rmdir删除的文件或目录为直接删除，无法恢复，使用删除指令时，考虑清楚后再执行。
+
+7、touch：创建文件
+
+8、cp：复制文件或目录
+   格式：
+   复制文件： cp 文件名 目标目录(该目录要求存在)
+   复制目录： cp -r 目录名 目标目录(该目录要求存在)
+   目录路径要存在(相对路径或绝对路径均可以)
+
+9、mv：移动文件或目录
+   格式：mv 即将移动的文件或目录 目标目录(该目录要求存在)
+
+10、tree：树形展示目录
+    安装：sudo apt install tree
+    如果安装失败，错误提示中有更新apt的命令，更新即可。如果更新结束后依旧报错，关机重启。如果关机重启后依旧报错，百度搜索apt tree安装失败。
+
+vi 文件名:编辑文件(按i键：开始输入，按esc键，退出编辑，输入:wq：保存并退出)
+
+11、ln：建立链接
+Linux下存储文件：文件名称---文件节点---存储地址
+
+    在linux中链接分为两种：硬链接 及 软连接(符号链接)
+    
+    建立硬链接：
+    ln 源文件名 链接文件名
+    同一个文件不同的名称，链接的文件真实存在，大小与源文件的大小一样。
+
+    建立软连接:
+    ln -s 源文件名 链接文件名
+    只是产生一个类似windows中的快捷键，只要源文件在，该链接符号有效，但大小很小，当源文件被删除时，链接符号还在，但当前只是一个无用的连接符号，大小几乎可以忽略不记。
+
+在工作中：尽量使用软链连接，原因：当源文件删除时，硬链接产生的链接文件与源文件大小一致，产生的多余的垃圾文件较大；软链接只会产生一个无效的链接符号，大小几乎可以忽略，当重新创建一个与之前文件同名的文件时，该链接依旧有效，可以指向新的文件。而硬链接的链接文件已经变成一个新的文件。
+
+
+
+七、命令前结构
+AAA@BBB:CCC[$#]
+1、AAA：当前登陆的用户
+2、BBB：当前的主机名称
+3、CCC：当前所处的路径
+4、~：代表当前用户的主目录  /home/用户名
+5、$：当前用户为普通用户
+6、#：当前用户为超级管理员root用户
+
+八、用户系统
+1、普通用户：自己创建的用户，平时尽量使用普通用户
+2、超级管理员(root用户)：无敌的存在，可以摧毁系统中任意内容
+3、普通用户执行超级管理员的命令，在命令前加sudo
+4、sudo 命令：当前用户为普通用户，但让超级管理员去执行该命令。
+5、切换为超级管理员：
+   执行命令： su
+   执行su命令后，需要输入超级管理员的密码。
+6、设置超级管理员密码：
+   sudo passwd root
+7、退出当前用户：exit
+8、切换用户： su 用户名
+
+9、passwd  修改用户密码
+  9.1、默认只能修改当前用户的密码
+  9.2、命令前有sudo，可以修改任意一个用户的密码
+  9.3、在root用户下，可以修改任意用户的密码。
+  9.4、用法 ： passwd [选项][用户名]
+     a、当选项及用户名全部不写时，默认只能修改当前用户的密码
+     b、当有用户名时，更改该用户名的密码
+     c、当选项为-d时，代表删除用户的密码(不能使用-d)
+     想要进入Linux系统，用户必须存在密码，没有密码的用户类似无效。
+
+ 
+安装
+ sudo apt install vim
+安装输入法：google：
+https://www.cnblogs.com/SNine/p/7804276.html
+
+
+
+
+
+
+
+
+
